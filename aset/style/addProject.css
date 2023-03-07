@@ -24,7 +24,8 @@
 #Name,
 #Email,
 #Subject,
-#Phone {
+#Phone,
+.uploadPhoto {
   box-shadow: 0 4px 6px -6px #808080;
 }
 
