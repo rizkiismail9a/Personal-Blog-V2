@@ -1,0 +1,76 @@
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: black;
+}
+
+.navbar-brand {
+  color: orangered;
+}
+.btn-outline-success {
+  color: white;
+  border: none;
+  font-size: 0.7rem;
+}
+#sesi_card {
+  align-items: center;
+  background-color: #e3e7eb;
+}
+#pembungkus_card {
+  width: 80vw;
+  background-color: #fbfbfb;
+}
+
+#img1 {
+  background-color: #f8f5f5;
+  width: 230px;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: auto;
+  text-align: center;
+}
+
+#button-card {
+  border-radius: 20px;
+}
+#cv {
+  font-size: 0.8rem;
+}
+#sosmed {
+  font-size: 1.5rem;
+}
+#sosmed a {
+  color: #000;
+  margin-right: 25px;
+}
+.card-img-top {
+  /* width: 90%; */
+  margin: 5px;
+}
+.durasi {
+  opacity: 0.8;
+  font-size: 0.7rem;
+}
+.card-text {
+  font-size: 0.9rem;
+}
+a.edit,
+a.delete {
+  background-color: #000;
+  color: white;
+  font-size: 0.6rem;
+  height: fit-content;
+  width: 49%;
+  border: none;
+}
+.alat-card {
+  font-size: 1.4rem;
+}
+.alat-card i {
+  margin: 18px 18px 18px 0;
+}

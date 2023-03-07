@@ -1,0 +1,36 @@
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: black;
+}
+
+.navbar-brand {
+  color: orangered;
+}
+.btn-outline-success {
+  color: white;
+  border: none;
+  font-size: 0.7rem;
+}
+#Message {
+  resize: none;
+}
+
+#Message,
+#Name,
+#Email,
+#Subject,
+#Phone {
+  box-shadow: 0 4px 6px -6px #808080;
+}
+
+#tanggal1,
+#tanggal2 {
+  /* background-color: aqua; */
+  padding: 0;
+  justify-content: space-between;
+}
