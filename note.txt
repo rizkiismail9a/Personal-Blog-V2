@@ -1,0 +1,120 @@
+package main
+
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"strconv"
+	"text/template"
+
+	"github.com/labstack/echo/v4"
+)
+
+type Template struct {
+	templates *template.Template
+} 
+// ada variabel namanya templates. Kita tak tahu apa tipe datanya. Jadi kita ambil dari import-an text/template di atas
+// Kita bakal pakai ini untuk merender html-nya
+// Kenapa harus pointer?
+
+func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	return t.templates.ExecuteTemplate(w, name, data)
+}
+// Template pada t *Template ini berasal dari struct. Lihat formatnya. Ini adalah method milik Template, bukan fungsi.
+// Parameter pertama tugasnya untuk mengirim elemen html. Dengan kata lain, respons
+// name untuk menamakan sesuatu
+// data itu nama variabel yang diambil dari interface{} yang akan dibikin di tugas Day-12
+// terakhir adalah context terkait apa yang dikirim
+// error adalah tipe data return
+//c echo.Context tidak di-return, tetapi wajib ditulis
+
+// Aku bacanya gini. 
+// Jadi, kita mau apa? Nulis => w io.Writer
+// Nulisnya dimana?  di file html yang disebut oleh name string
+// Apa yang ditulis? Ada tambahan tidak? Sesuai isi html dan tambahannya adalah tergantung fungsi pemanggilnya
+// Panduannya apa? c echo
+
+func main() {
+	e := echo.New()
+	// memanggil framework echo
+
+	// route statis untuk mengakses folder public
+	e.Static("/public", "public") // /public
+	// Kenapa bersifat statis?
+	// /public pertama adalah nama rute dan public kedua adalah nama folder tujuan
+
+	// renderer
+	t := &Template{
+		templates: template.Must(template.ParseGlob("views/*.html")), 
+		// Ini adalah inisialisasi property templates di struct
+		// template.Must itu dari import-an
+		//ParseGlob itu untuk parsing, mengurai. Apa yang di-parsing? semua isi folder views. Di sini, template-nya juga dari import-an
+	}
+	// Ini apa? Gunanya buat apa?
+
+	e.Renderer = t
+	// Ini dari framework echo untuk merender t
+	// Jadi untuk merender laman HTML, kita pakai t := &Template dan e.renderer
+
+	// Routing
+	e.GET("/hello", helloWorld)           //localhost:5000/hello
+	e.GET("/", home)                      //localhost:5000
+	e.GET("/contact", contact)            //localhost:5000/contact
+	e.GET("/blog", blog)                  //localhost:5000/blog
+	e.GET("/blog-detail/:id", blogDetail) //localhost:5000/blog-detail/0 | :id = url params
+	e.GET("/form-blog", formAddBlog)      //localhost:5000/form-blog
+	e.POST("/add-blog", addBlog)          //localhost:5000/add-blog
+
+	// GET adalah method. Maknanya, kita akan dapat sesuatu saat memanggilnya
+	// Cara bacanya, saat kita membuka localhost:5000/hello, kita akan mendapatkan sesuatu di dalam fungsi helloWorld
+	// Sedangkan untuk POST, kita akan mengirim sesuatu
+	// Method itu ada banyak, tetapi HTML hanya bisa memproses get dan post
+
+	fmt.Println("Server berjalan di port 5000")
+	e.Logger.Fatal(e.Start("localhost:5000"))
+}
+
+func helloWorld(c echo.Context) error {
+	return c.String(http.StatusOK, "Hello World!")
+}
+
+func home(c echo.Context) error {
+	return c.Render(http.StatusOK, "index.html", nil)
+}
+
+func contact(c echo.Context) error {
+	return c.Render(http.StatusOK, "contact.html", nil)
+}
+
+func blog(c echo.Context) error {
+	return c.Render(http.StatusOK, "blog.html", nil)
+}
+
+func blogDetail(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id")) // url params | dikonversikan dari string menjadi int/integer
+	// kita harus mengonversi id yang semula string agar menjadi int
+	// _ itu untuk hendle error. Namun, karena kita tidak mengatur error-nya dulu, maka kita pakai _. Sebab variabel itu belum dipakai
+
+	data := map[string]interface{}{ // data yang akan digunakan/dikirimkan ke html menggunakan map interface
+		"Id":      id,
+		"Title":   "Pasar Coding di Indonesia Dinilai Masih Menjanjikan",
+		"Content": "Ketimpangan sumber daya manusia (SDM) di sektor digital masih menjadi isu yang belum terpecahkan. Berdasarkan penelitian ManpowerGroup, ketimpangan SDM global, termasuk Indonesia, meningkat dua kali lipat dalam satu dekade terakhir. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam, molestiae numquam! Deleniti maiores expedita eaque deserunt quaerat! Dicta, eligendi debitis?",
+	}
+
+	return c.Render(http.StatusOK, "blog-detail.html", data)
+	// Lihat, di sini, dia mengirimkan variabel data. Jadi bukan nil lagi.
+}
+
+func formAddBlog(c echo.Context) error {
+	return c.Render(http.StatusOK, "add-blog.html", nil)
+}
+
+func addBlog(c echo.Context) error {
+	title := c.FormValue("inputTitle")
+	content := c.FormValue("inputContent")
+
+	println("Title: " + title)
+	println("Content: " + content)
+
+	return c.Redirect(http.StatusMovedPermanently, "/blog")
+}
