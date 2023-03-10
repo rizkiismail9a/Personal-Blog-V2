@@ -43,7 +43,7 @@
     <!-- Akhir Navbar -->
 
     <!-- Detail Project -->
-    <h2 class="text-center my-5">{{.Title}}</h2>
+    <h2 class="text-center my-5">{{.ProjectKuy.Title}}</h2>
     <div class="container px-0">
       <div class="container d-flex" id="img-tech">
         <div class="container d-flex p-0 mx-5 justify-content-between">
@@ -52,8 +52,8 @@
         <div class="container d-flex flex-column">
           <h4 class="ms-4 fw-bold">Duration</h4>
           <div class="container d-flex flex-column m-3 fs-5">
-            <div class="my-2"><i class="fa-regular fa-calendar-days"></i> <span>12 Jan 2021 - 11 Feb 2021</span></div>
-            <div class="my-2"><i class="fa-regular fa-clock"></i> <span>1 month(s)</span></div>
+            <div class="my-2"><i class="fa-regular fa-calendar-days"></i> <span>{{.ProjectKuy.StartDate}} to {{.ProjectKuy.EndDate}}</span></div>
+            <div class="my-2"><i class="fa-regular fa-clock"></i> <span>{{.ProjectKuy.Duration}}</span></div>
           </div>
           <h4 class="ms-4 fw-bold">Technologies</h4>
           <div class="container d-flex flex-row flex-wrap m-3 fs-5" style="width: 400px">
@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="container">
-        <p class="m-5" style="text-align: justify">{{.Content}}</p>
+        <p class="m-5" style="text-align: justify">{{.ProjectKuy.Description}}</p>
       </div>
     </div>
   </body>

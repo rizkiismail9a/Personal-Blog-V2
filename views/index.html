@@ -81,7 +81,28 @@
         <!-- Example Code -->
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
+          {{range $index, $data:= .projects}}
           <div class="col">
+            <div class="card" style="width: fit-content">
+              <div class="container d-flex justify-content-center mt-2">
+                <img src="/public/image/intro-1576253925.jpg" class="card-img-top" />
+              </div>
+              <div class="card-body">
+                <h6 class="card-title fw-bold"><a href="/projectDetail/{{$index}}" style="text-decoration: none; color: black">{{$data.Title}}</a></h6>
+                <p class="durasi">{{$data.Duration}}</p>
+                <p class="card-text mb-1">{{$data.Description}}</p>
+                <div class="mt-0 alat-card">
+                  <i class="fa-solid fa-mobile-retro"></i>
+                  <i class="fa-solid fa-mobile-retro"></i>
+                  <i class="fa-solid fa-mobile-retro"></i>
+                </div>
+                <a href="#" class="btn btn-primary edit">edit</a>
+                <a href="/delete/{{$index}}" class="btn btn-primary delete">delete</a>
+              </div>
+            </div>
+          </div>
+          {{end}}
+          <!-- <div class="col">
             <div class="card" style="width: fit-content">
               <div class="container d-flex justify-content-center mt-2">
                 <img src="/public/image/intro-1576253925.jpg" class="card-img-top" />
@@ -137,8 +158,8 @@
                 <a href="#" class="btn btn-primary delete">delete</a>
               </div>
             </div>
-          </div>
-          <div class="col">
+          </div> -->
+          <!-- <div class="col">
             <div class="card" style="width: fit-content">
               <div class="container d-flex justify-content-center mt-2">
                 <img src="/public/image/intro-1576253925.jpg" class="card-img-top" />
@@ -156,26 +177,7 @@
                 <a href="#" class="btn btn-primary delete">delete</a>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: fit-content">
-              <div class="container d-flex justify-content-center mt-2">
-                <img src="/public/image/intro-1576253925.jpg" class="card-img-top" />
-              </div>
-              <div class="card-body">
-                <h6 class="card-title fw-bold"><a href="/projectDetail/0" style="text-decoration: none; color: black">Dumbways Mobile App - 2021</a></h6>
-                <p class="durasi">durasi: 3 bulan</p>
-                <p class="card-text mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, nisi modi ipsa neque quis enim..</p>
-                <div class="mt-0 alat-card">
-                  <i class="fa-solid fa-mobile-retro"></i>
-                  <i class="fa-solid fa-mobile-retro"></i>
-                  <i class="fa-solid fa-mobile-retro"></i>
-                </div>
-                <a href="#" class="btn btn-primary edit">edit</a>
-                <a href="#" class="btn btn-primary delete">delete</a>
-              </div>
-            </div>
-          </div>
+          </div> -->
         </div>
 
         <!-- End Example Code -->
