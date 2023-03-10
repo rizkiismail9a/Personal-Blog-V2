@@ -78,10 +78,28 @@ func postProject(c echo.Context) error  {
 	println(title)
 	println(startDate)
 	println(endDate)
-	println(node)
-	println(next)
-	println(react)
-	println(typescript)
+	if node == "on"  {
+		println("node=", node)
+	} else {
+		println("node = off")
+	}
+	if next == "on"  {
+		println("next=", next)
+	} else {
+		println("next = off")
+	}
+	if react == "on"  {
+		println("react=", react)
+	} else {
+		println("react = off")
+	}
+	if typescript == "on"  {
+		println("typescript=", typescript)
+	} else {
+		println("typescript = off")
+	}
+	
+	
 	println(Description)
 	
 	return c.Redirect(http.StatusMovedPermanently, "/")
